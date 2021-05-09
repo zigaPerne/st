@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Source code pro:pixelsize=16:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -94,48 +94,45 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8, alphaUnfocused = 0.6;
+float alpha = 0.9, alphaUnfocused = 0.7;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+const char *colorname[] = {
 
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+  /* 8 normal colors */
+  [0] = "#020912", /* black   */
+  [1] = "#b91e2e", /* red     */
+  [2] = "#72143d", /* magenta */
+  [3] = "#1d435a", /* cyan    */
+  [4] = "#356579", /* blue    */
+  [5] = "#81957c", /* green   */
+  [6] = "#f9bb80", /* yellow  */
+  [7] = "#909090", /* white   */
 
-	[255] = 0,
+  /* 8 bright colors */
+  [8]  = "#606060",  /* black   */
+  [9]  = "#b91e2e",  /* red     */
+  [10] = "#72143d", /* magenta */
+  [11] = "#1d435a", /* cyan    */
+  [12] = "#356579", /* blue    */
+  [13] = "#81957c", /* green   */
+  [14] = "#f9bb80", /* yellow  */
+  [15] = "#909090", /* white   */
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"black",
+  /* special colors */
+  [256] = "#101010", /* background */
+  [257] = "#d2c5bc", /* foreground */
+  [258] = "#d14548",     /* cursor */
 };
 
-
-/*
- * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
- */
-unsigned int defaultfg = 7;
+/* Default colors (colorname index)
+ * foreground, background, cursor */
+unsigned int defaultfg = 257;
 unsigned int defaultbg = 0;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
-unsigned int bg = 17, bgUnfocused = 16;
+static unsigned int defaultcs = 15;
+static unsigned int defaultrcs = 15;
+unsigned int bg = 0, bgUnfocused = 0;
+
 
 /*
  * Default shape of cursor
@@ -179,8 +176,8 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
-	{ ShiftMask,            Button5, kscrolldown,    {.i = 1} },
+	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1} },
+	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -198,8 +195,8 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ ShiftMask,            XK_KP_Add,      zoom,           {.f = +1} },
+	{ ShiftMask,            XK_KP_Subtract, zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
