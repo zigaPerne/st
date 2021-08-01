@@ -6,6 +6,10 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Source code pro:pixelsize=16:antialias=true:autohint=true";
+static char *font2[] = {
+	"Roboto Mono for Powerline:pixelsize=16:antialias=true:autohint=true",
+	"Symbola:pixelsize=16:antialias=true:autohint=true"
+};
 static int borderpx = 2;
 
 /*

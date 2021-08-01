@@ -5,7 +5,11 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Source code pro:pixelsize=18:antialias=true:autohint=true";
+static char *font = "Source code pro:pixelsize=16:antialias=true:autohint=true";
+static char *font2[] = {
+	"Roboto Mono for Powerline:pixelsize=16:antialias=true:autohint=true",
+	"Symbola:pixelsize=16:antialias=true:autohint=true"
+};
 static int borderpx = 2;
 
 /*
@@ -94,7 +98,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8, alphaUnfocused = 0.75;
+float alpha = 0.9, alphaUnfocused = 0.7;
 
 /* Terminal colors (16 first used in escape sequence) */
 const char *colorname[] = {
