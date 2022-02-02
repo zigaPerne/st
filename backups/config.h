@@ -98,58 +98,44 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8, alphaUnfocused = 0.75;
-
+float alpha = 0.85, alphaUnfocused = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
+const char *colorname[] = {
 
   /* 8 normal colors */
-  [0] = "#1b0c0d", /* black   */
-  [1] = "#9e3949", /* red     */
-  [2] = "#ac3235", /* green   */
-  [3] = "#dc3c45", /* yellow  */
-  [4] = "#eb5257", /* blue    */
-  [5] = "#f99e6a", /* magenta */
-  [6] = "#d3afbf", /* cyan    */
-  [7] = "#9d4e5d", /* white   */
+  [0] = "#020912", /* black   */
+  [1] = "#b91e2e", /* red     */
+  [2] = "#72143d", /* magenta */
+  [3] = "#1d435a", /* cyan    */
+  [4] = "#356579", /* blue    */
+  [5] = "#81957c", /* green   */
+  [6] = "#f9bb80", /* yellow  */
+  [7] = "#909090", /* white   */
 
   /* 8 bright colors */
-  [8]  = "#937a85", /* black   */
-  [9]  = "#9e3949", /* red     */
-  [10] = "#ac3235", /* green   */
-  [11] = "#dc3c45", /* yellow  */
-  [12] = "#eb5257", /* blue    */
-  [13] = "#f99e6a", /* magenta */
-  [14] = "#d3afbf", /* cyan    */
-  [15] = "#9d4e5d", /* white   */
+  [8]  = "#606060",  /* black   */
+  [9]  = "#b91e2e",  /* red     */
+  [10] = "#72143d", /* magenta */
+  [11] = "#1d435a", /* cyan    */
+  [12] = "#356579", /* blue    */
+  [13] = "#81957c", /* green   */
+  [14] = "#f9bb80", /* yellow  */
+  [15] = "#909090", /* white   */
 
   /* special colors */
-  [256] = "#1b0c0d", /* background */
-  [257] = "#fbf1f6", /* foreground */
+  [256] = "#101010", /* background */
+  [257] = "#d2c5bc", /* foreground */
+  [258] = "#d14548",     /* cursor */
 };
 
-/*
- * Default colors (colorname index)
- * foreground, background, cursor
- */
-
-/*
- * Colors used, when the specific fg == defaultfg. So in reverse mode this
- * will reverse too. Another logic would only make the simple feature too
- * complex.
- */
-static unsigned int defaultitalic = 7;
-static unsigned int defaultunderline = 7;
-/*
- * Default colors (colorname index)
- * foreground, background, cursor
- */
+/* Default colors (colorname index)
+ * foreground, background, cursor */
 unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-static unsigned int defaultcs = 257;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 15;
 static unsigned int defaultrcs = 15;
-unsigned int bg = 256, bgUnfocused = 256;
+unsigned int bg = 0, bgUnfocused = 0;
 
 
 /*
@@ -207,8 +193,6 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
-static char *linkgrabber[] = { "/bin/sh", "-c", "st-linkgrabber", "externalpipe", NULL };
-
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
@@ -224,7 +208,6 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ TERMMOD,              XK_Escape,      keyboard_select,{.i =  0} },
-	{ MODKEY,		XK_u,		externalpipe, 	{.v = linkgrabber}},
 };
 
 /*
