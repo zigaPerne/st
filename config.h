@@ -207,7 +207,10 @@ static MouseShortcut mshortcuts[] = {
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
-static char *linkgrabber[] = { "/bin/sh", "-c", "st-linkgrabber", "externalpipe", NULL };
+static char *linkgrabber_open[] = { "/bin/sh", "-c", "st-linkgrabber -o", "externalpipe", NULL };
+static char *linkgrabber_copy[] = { "/bin/sh", "-c", "st-linkgrabber -c", "externalpipe", NULL };
+static char *copyoutput_all[] = { "/bin/sh", "-c", "st-copyoutput -a", "externalpipe", NULL };
+static char *copyoutput_command[] = { "/bin/sh", "-c", "st-copyoutput -o", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -224,7 +227,10 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ TERMMOD,              XK_Escape,      keyboard_select,{.i =  0} },
-	{ MODKEY,		XK_u,		externalpipe, 	{.v = linkgrabber}},
+	{ MODKEY,		XK_u,		externalpipe, 	{.v = linkgrabber_open}},
+	{ MODKEY,		XK_o,		externalpipe, 	{.v = linkgrabber_copy}},
+	{ MODKEY,		XK_c,		externalpipe, 	{.v = copyoutput_all}},
+	{ MODKEY,		XK_y,		externalpipe, 	{.v = copyoutput_command}},
 };
 
 /*
