@@ -5,10 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-
 static char *font = "Source code pro:pixelsize=16:antialias=true:autohint=true";
-static char *font2 = {"Siji:size=16:antialias=true:autohint=true"
-};
 static int borderpx = 2;
 
 /*
@@ -99,34 +96,68 @@ unsigned int tabspaces = 8;
 /* bg opacity */
 float alpha = 0.85, alphaUnfocused = 0.75;
 
+
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 
   /* 8 normal colors */
-  [0] = "#222827", /* black   */
-  [1] = "#d5a8e3", /* red     */
-  [2] = "#9c75dd", /* green   */
-  [3] = "#9898ae", /* yellow  */
-  [4] = "#654a96", /* blue    */
-  [5] = "#625566", /* magenta */
-  [6] = "#a9d1df", /* cyan    */
-  [7] = "#e6ebe5", /* white   */
+ /* [0] = "#1b0c0d",
+ * [1] = "#9e3949", 
+ * [2] = "#ac3235", 
+ * [3] = "#dc3c45", 
+ * [4] = "#eb5257", 
+ * [5] = "#f99e6a", 
+ * [6] = "#d3afbf", 
+ * [7] = "#9d4e5d", 
+ */
 
   /* 8 bright colors */
-  [8]  = "#5d6f74", /* black   */
-  [9]  = "#cd749c", /* red     */
-  [10] = "#63b0b0", /* green   */
-  [11] = "#c0c0dd", /* yellow  */
-  [12] = "#5786bc", /* blue    */
-  [13] = "#3f3442", /* magenta */
-  [14] = "#849da2", /* cyan    */
-  [15] = "#d9d6cf", /* white   */
+/*
+  [8]  = "#937a85", 
+  [9]  = "#9e3949", 
+  [10] = "#ac3235", 
+  [11] = "#dc3c45", 
+  [12] = "#eb5257", 
+  [13] = "#f99e6a", 
+  [14] = "#d3afbf", 
+  [15] = "#9d4e5d", 
+*/
+
+  [0] = "#3c303d",
+  [1] ="#A697A8",
+  [2] ="#B0B5F8",
+  [3] ="#CE98DA",
+  [4] ="#F49AF9",
+  [5] ="#F1ABFA",
+  [6] ="#8CCCFE",
+  [7] ="#d0e8f6",
+  [8] ="#91a2ac",
+  [9] ="#A697A8",
+  [10] ="#B0B5F8",
+  [11] ="#CE98DA",
+  [12] ="#F49AF9",
+  [13] ="#F1ABFA",
+  [14] ="#8CCCFE",
+  [15] ="#d0e8f6",
 
   /* special colors */
   [256] = "#101011", /* background */
   [257] = "#fbf1f6", /* foreground */
 };
 
+
+/*
+ * Default colors (colorname index)
+ * foreground, background, cursor
+ */
+
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
 /*
  * Default colors (colorname index)
  * foreground, background, cursor

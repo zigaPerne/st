@@ -5,10 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
+
 static char *font = "Source code pro:pixelsize=16:antialias=true:autohint=true";
-static char *font2[] = {
-	"Roboto Mono for Powerline:pixelsize=16:antialias=true:autohint=true",
-	"Symbola:pixelsize=16:antialias=true:autohint=true"
+static char *font2 = {"Siji:size=16:antialias=true:autohint=true"
 };
 static int borderpx = 2;
 
@@ -98,49 +97,36 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8, alphaUnfocused = 0.75;
-
+float alpha = 0.85, alphaUnfocused = 0.75;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 
   /* 8 normal colors */
-  [0] = "#1b0c0d", /* black   */
-  [1] = "#9e3949", /* red     */
-  [2] = "#ac3235", /* green   */
-  [3] = "#dc3c45", /* yellow  */
-  [4] = "#eb5257", /* blue    */
-  [5] = "#f99e6a", /* magenta */
-  [6] = "#d3afbf", /* cyan    */
-  [7] = "#9d4e5d", /* white   */
+  [0] = "#222827", /* black   */
+  [1] = "#d5a8e3", /* red     */
+  [2] = "#9c75dd", /* green   */
+  [3] = "#9898ae", /* yellow  */
+  [4] = "#654a96", /* blue    */
+  [5] = "#625566", /* magenta */
+  [6] = "#a9d1df", /* cyan    */
+  [7] = "#e6ebe5", /* white   */
 
   /* 8 bright colors */
-  [8]  = "#937a85", /* black   */
-  [9]  = "#9e3949", /* red     */
-  [10] = "#ac3235", /* green   */
-  [11] = "#dc3c45", /* yellow  */
-  [12] = "#eb5257", /* blue    */
-  [13] = "#f99e6a", /* magenta */
-  [14] = "#d3afbf", /* cyan    */
-  [15] = "#9d4e5d", /* white   */
+  [8]  = "#5d6f74", /* black   */
+  [9]  = "#cd749c", /* red     */
+  [10] = "#63b0b0", /* green   */
+  [11] = "#c0c0dd", /* yellow  */
+  [12] = "#5786bc", /* blue    */
+  [13] = "#3f3442", /* magenta */
+  [14] = "#849da2", /* cyan    */
+  [15] = "#d9d6cf", /* white   */
 
   /* special colors */
-  [256] = "#1b0c0d", /* background */
+  [256] = "#101011", /* background */
   [257] = "#fbf1f6", /* foreground */
 };
 
-/*
- * Default colors (colorname index)
- * foreground, background, cursor
- */
-
-/*
- * Colors used, when the specific fg == defaultfg. So in reverse mode this
- * will reverse too. Another logic would only make the simple feature too
- * complex.
- */
-static unsigned int defaultitalic = 7;
-static unsigned int defaultunderline = 7;
 /*
  * Default colors (colorname index)
  * foreground, background, cursor
@@ -206,11 +192,13 @@ static MouseShortcut mshortcuts[] = {
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
+#define ALTSHIFT (Mod1Mask|ShiftMask)
 
 static char *linkgrabber_open[] = { "/bin/sh", "-c", "st-linkgrabber -o", "externalpipe", NULL };
 static char *linkgrabber_copy[] = { "/bin/sh", "-c", "st-linkgrabber -c", "externalpipe", NULL };
 static char *copyoutput_all[] = { "/bin/sh", "-c", "st-copyoutput -a", "externalpipe", NULL };
-static char *copyoutput_command[] = { "/bin/sh", "-c", "st-copyoutput -o", "externalpipe", NULL };
+static char *copyoutput_command_prompt[] = { "/bin/sh", "-c", "st-copyoutput -o", "externalpipe", NULL };
+static char *copyoutput_command[] = { "/bin/sh", "-c", "st-copyoutput -p", "externalpipe", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -228,8 +216,9 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ TERMMOD,              XK_Escape,      keyboard_select,{.i =  0} },
 	{ MODKEY,		XK_u,		externalpipe, 	{.v = linkgrabber_open}},
-	{ MODKEY,		XK_o,		externalpipe, 	{.v = linkgrabber_copy}},
+	{ ALTSHIFT,		XK_U,		externalpipe, 	{.v = linkgrabber_copy}},
 	{ MODKEY,		XK_c,		externalpipe, 	{.v = copyoutput_all}},
+	{ ALTSHIFT,		XK_Y,		externalpipe, 	{.v = copyoutput_command_prompt}},
 	{ MODKEY,		XK_y,		externalpipe, 	{.v = copyoutput_command}},
 };
 
