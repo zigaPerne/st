@@ -7,7 +7,7 @@
  */
 
 static char *font = "Source code pro:pixelsize=16:antialias=true:autohint=true";
-static char *font2 = {"Siji:size=16:antialias=true:autohint=true"
+static char *font2 = { "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true"
 };
 static int borderpx = 2;
 
